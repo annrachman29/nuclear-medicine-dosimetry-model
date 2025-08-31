@@ -8,12 +8,13 @@
 
 ## Project Overview
 
-This project is a **full-functioning web application** designed to automate internal radiation dosimetry in nuclear medicine. It uses machine learning to automatically select the best kinetic model (f2–f8) for each patient based on serial time–activity data. The system performs curve fitting, visualizes results, and provides mathematical formulas for pharmacokinetic analysis.
+This project is a **web application** designed to automate internal radiation dosimetry in nuclear medicine. It uses machine learning to automatically select the best kinetic model (f2–f8) for radiopharmaceutical 177Lu-PSMA each virtual data prostate cancer patient based on serial time–activity data. The system performs curve fitting, visualizes results, and provides mathematical formulas for pharmacokinetic analysis.
 
 ## Background
-Internal radiation dosimetry is essential in nuclear medicine therapy, but manual model selection is slow and requires expertise. Errors in dose calculation may lead to:
+Internal radiation dosimetry is essential in nuclear medicine therapy, but manual model selection is slow and requires advanced expertise. Errors in dose calculation may lead to:
 - Overdose: Excessive radiation → higher risk of side effects
 - Underdose: Insufficient radiation → ineffective treatment
+
 This system aims to:
 - Automate dosimetry with machine learning
 - Reduce time for complex calculations
@@ -26,14 +27,10 @@ This system aims to:
 
 ## Features
 
-### Data Input
-- Upload patient data (`.csv` or `.xlsx`)  
-- Manual time–activity data entry  
-
 ### Data Management
-- Add Row – Add a new time–activity data point  
-- Delete Last Row – Remove last entry  
-- Restart – Clear all data  
+- Add Row: Add a new time–activity data point  
+- Restart: Clear all data
+- Predict: To predict the best model for the spesific time-activity data point  
 
 ### Automated Kinetic Model Prediction
 - Supports models: f2–f8  
@@ -96,6 +93,7 @@ The frontend development mode will run on (http://localhost:3000) in your browse
 
 ### 4. Using Virtual Patient Data
 You can manually input data in the frontend interface for testing
+
 **Example Input for Sample Data to Test the Application:**
 
 | Time (h) | %ID/gr       |
@@ -119,14 +117,14 @@ IBM Granite AI assisted during development to:
 ---
 
 ## Recommended Further Development (After Research-Trial):
-Frontend: Vercel (for React apps)
-Backend: Render or Railway (supports FastAPI)
-Alternative: Firebase Hosting (if backend integrated as cloud function)
+- Frontend: Vercel (for React apps)
+- Backend: Render or Railway (supports FastAPI)
+- Alternative: Firebase Hosting (if backend integrated as cloud function)
 
 ---
 
 ## Disclaimer
-This project is for research and educational purposes only.
+This project is for research and educational purposes only.\
 It is not a certified medical device and must not be used in clinical settings without proper regulatory approval and validation.
 
 
