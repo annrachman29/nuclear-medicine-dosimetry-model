@@ -1,8 +1,7 @@
-import os
 import pandas as pd
 import numpy as np
 import matplotlib
-matplotlib.use('Agg')
+matplotlib.use('Agg') 
 import matplotlib.pyplot as plt
 import io
 import base64
@@ -22,29 +21,30 @@ def safe_exp(x):
     x = np.clip(x, -700, 700)
     return np.exp(x)
 
-def f2(t, A1, l1, lphys):
+def f2(t, A1, l1, lphys): 
     return A1 * safe_exp(-(l1 + lphys) * t)
 
-def f3(t, A1, l1, l2, lphys):
+def f3(t, A1, l1, l2, lphys): 
     return A1 * safe_exp(-(l1 + lphys) * t) - A1 * safe_exp(-(l2 + lphys) * t)
 
-def f4(t, A1, A2, l1, l2, lbc, lphys):
+def f4(t, A1, A2, l1, l2, lbc, lphys): 
     return A1*safe_exp(-(l1+lphys)*t) - A2*safe_exp(-(l2+lphys)*t) - (A1-A2)*safe_exp(-(lbc+lphys)*t)
 
-def f5(t, A1, A2, l1, l2, l3, lphys):
+def f5(t, A1, A2, l1, l2, l3, lphys): 
     return A1*safe_exp(-(l1+lphys)*t) + A2*safe_exp(-(l2+lphys)*t) - (A1+A2)*safe_exp(-(l3+lphys)*t)
 
-def f6(t, A1, A2, A3, l1, l2, l3, lbc, lphys):
+def f6(t, A1, A2, A3, l1, l2, l3, lbc, lphys): 
     return A1*safe_exp(-(l1+lphys)*t) + A2*safe_exp(-(l2+lphys)*t) - A3*safe_exp(-(l3+lphys)*t) - (A1+A2-A3)*safe_exp(-(lbc+lphys)*t)
 
-def f7(t, A1, A2, A3, l1, l2, l3, l4, lphys):
+def f7(t, A1, A2, A3, l1, l2, l3, l4, lphys): 
     return A1*safe_exp(-(l1+lphys)*t) + A2*safe_exp(-(l2+lphys)*t) - A3*safe_exp(-(l3+lphys)*t) - (A1+A2-A3)*safe_exp(-(l4+lphys)*t)
 
-def f8(t, A1, A2, A3, A4, l1, l2, l3, l4, lbc, lphys):
+def f8(t, A1, A2, A3, A4, l1, l2, l3, l4, lbc, lphys): 
     return A1*safe_exp(-(l1+lphys)*t) + A2*safe_exp(-(l2+lphys)*t) + A3*safe_exp(-(l3+lphys)*t) - A4*safe_exp(-(l4+lphys)*t) - (A1+A2+A3-A4)*safe_exp(-(lbc+lphys)*t)
 
 models = {"f2": f2, "f3": f3, "f4": f4, "f5": f5, "f6": f6, "f7": f7, "f8": f8}
 
+# LaTeX representations
 model_formulas = {
     "f2": r"f_2(t) = A_1 e^{-(\lambda_1 + \lambda_{phys}) t}",
     "f3": r"f_3(t) = A_1 e^{-(\lambda_1 + \lambda_{phys}) t} - A_1 e^{-(\lambda_2 + \lambda_{phys}) t}",
@@ -58,8 +58,7 @@ model_formulas = {
 # --------------------------
 # Load CSV & train RandomForest
 # --------------------------
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # folder tempat final_app.py
-csv_path = os.path.join(BASE_DIR, "data", "Combined_Virtual_Data_UniqueID.csv")
+csv_path = "data/Combined_Virtual_Data_UniqueID.csv"
 df = pd.read_csv(csv_path, sep=';')
 
 valid_models = ['f2', 'f3', 'f4b', 'f5a', 'f6a', 'f7b', 'f8a']
@@ -96,6 +95,7 @@ def predict_model():
         return jsonify({"error": "Input data is empty"}), 400
 
     try:
+        # Predict model
         X_input = [sum([[row["%ID/gr"], row["Time"]] for _, row in df_input.iterrows()], [])]
         pred_model = clf.predict(X_input)[0]
 
@@ -103,10 +103,11 @@ def predict_model():
             return jsonify({"error": f"Predicted model '{pred_model}' not implemented"}), 400
 
         model_func = models[pred_model]
+
+        # Curve fitting
         t = df_input["Time"].to_numpy()
         y = df_input["%ID/gr"].to_numpy()
         p0 = [1]*(len(model_func.__code__.co_varnames)-1)
-
         try:
             popt, _ = curve_fit(model_func, t, y, p0=p0, maxfev=5000)
             params = {k: float(v) for k, v in zip(model_func.__code__.co_varnames[1:len(popt)+1], popt)}
@@ -115,6 +116,7 @@ def predict_model():
             params = {}
             print("⚠️ Curve fit failed:", e)
 
+        # Generate plot (safe for macOS)
         plt.figure(figsize=(6,4))
         plt.scatter(t, y, color="blue", label="Data")
         if popt is not None:
@@ -138,13 +140,12 @@ def predict_model():
         })
 
     except Exception as e:
+        #print("❌ Prediction error:", e)
         print("DEBUG: Base64 length:", len(img_base64))
         return jsonify({"error": str(e)}), 500
 
 # --------------------------
-# Run Flask (Railway compatible)
+# Run Flask
 # --------------------------
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))
-    app.run(host="0.0.0.0", port=port)
-
+    app.run(debug=True, port=8000)
