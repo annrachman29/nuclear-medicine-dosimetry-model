@@ -58,7 +58,8 @@ model_formulas = {
 # --------------------------
 # Load CSV & train RandomForest
 # --------------------------
-csv_path = "data/Combined_Virtual_Data_UniqueID.csv"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # folder tempat final_app.py
+csv_path = os.path.join(BASE_DIR, "data", "Combined_Virtual_Data_UniqueID.csv")
 df = pd.read_csv(csv_path, sep=';')
 
 valid_models = ['f2', 'f3', 'f4b', 'f5a', 'f6a', 'f7b', 'f8a']
