@@ -1,70 +1,132 @@
-# Getting Started with Create React App
+# Nuclear Medicine Dosimetry Modeller with AI-Based Individual Model Selection
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Author:** Annisa Rachman (2025)  
+**LinkedIn:** [linkedin.com/in/annisarachman](https://linkedin.com/in/annisarachman)  
+**GitHub:** [github.com/annrachman29](https://github.com/annrachman29)  
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Project Overview
 
-### `npm start`
+This project is a **full-functioning web application** designed to automate internal radiation dosimetry in nuclear medicine. It uses machine learning to automatically select the best kinetic model (f2–f8) for each patient based on serial time–activity data. The system performs curve fitting, visualizes results, and provides mathematical formulas for pharmacokinetic analysis.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Background
+Internal radiation dosimetry is essential in nuclear medicine therapy, but manual model selection is slow and requires expertise. Errors in dose calculation may lead to:
+- Overdose: Excessive radiation → higher risk of side effects
+- Underdose: Insufficient radiation → ineffective treatment
+This system aims to:
+- Automate dosimetry with machine learning
+- Reduce time for complex calculations
+- Reduce human resource burden
+- Improve patient safety with precise, individualized dose calculations
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+> **Note:** IBM Granite AI was used **only during development** for code generation, optimization, and documentation. 
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Features
 
-### `npm run build`
+### Data Input
+- Upload patient data (`.csv` or `.xlsx`)  
+- Manual time–activity data entry  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Data Management
+- Add Row – Add a new time–activity data point  
+- Delete Last Row – Remove last entry  
+- Restart – Clear all data  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Automated Kinetic Model Prediction
+- Supports models: f2–f8  
+- Uses Random Forest Classifier to predict best fit  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Curve Fitting & Parameter Estimation
+- Displays fitted curve over raw data  
+- Shows mathematical formula (LaTeX-rendered)  
 
-### `npm run eject`
+### Results Visualization
+- Graphical curve plot  
+- Estimated kinetic parameters  
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Technologies Used
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **Frontend:** React.js (Bootstrap & KaTeX for formula rendering)  
+- **Backend:** FastAPI (Python)  
+- **Machine Learning:** Random Forest Classifier  
+- **Visualization:** Matplotlib (Python), KaTeX (React)  
+- **Data Handling:** Pandas, NumPy  
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## Setup & Running Instructions (Local Development)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 1. Clone Repository
+```bash
+git clone https://github.com/annrachman29/nuclear-medicine-dosimetry-model.git
+cd nuclear-medicine-dosimetry-model
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 2. Backend Setup
+Install dependencies:
+```bash
+cd backend
+pip install -r requirements.txt
+```
+Run backend server:
+```bash
+python final_app.py
+```
+The backend API will run on: http://127.0.0.1:8000
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 3. Frontend Setup
+Install dependencies:
+```bash
+cd frontend
+npm install
+```
+Run frontend:
+```bash
+npm start
+```
+The frontend development mode will run on (http://localhost:3000) in your browser.
+> The page will reload when you make changes.
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 4. Using Virtual Patient Data
+You can manually input data in the frontend interface for testing
+**Example Input:**
 
-### Making a Progressive Web App
+*Time (h)*     | *%ID/gr*
+2     | 1.460908772
+18    | 0.793761054
+42    | 0.467941345
+88    | 0.354520415
+160   | 0.000581826
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+**Real Best Model Output: f2**
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## AI Support Explanation
+IBM Granite AI assisted during development to:
+- Accelerate initial code generation (React, FastAPI, ML integration)
+- Suggest UI/UX improvements (layout, responsive design)
+- Optimize machine learning pipeline for faster prediction
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Recommended Further Development (After Research-Trial):
+Frontend: Vercel (for React apps)
+Backend: Render or Railway (supports FastAPI)
+Alternative: Firebase Hosting (if backend integrated as cloud function)
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Disclaimer
+This project is for research and educational purposes only.
+It is not a certified medical device and must not be used in clinical settings without proper regulatory approval and validation.
+
+
+
