@@ -127,5 +127,11 @@ IBM Granite AI assisted during development to:
 This project is for research and educational purposes only.\
 It is not a certified medical device and must not be used in clinical settings without proper regulatory approval and validation.
 
+---
+
+## Author Affiliate Institution
+Nuclear Medicine Research Group, Physics Department, Universitas Indonesia\
+Indonesia's Nuclear Research Agency, National Research and Innovation Agency (BRIN)\
+Medical Physics Program, Department of Radiology and Radiological Science & Department of Radiation Oncology and Molecular Radiation Sciences, School of Medicine, Johns Hopkins University
 
 
