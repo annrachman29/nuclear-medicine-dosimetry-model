@@ -1,7 +1,6 @@
 pandas 
 numpy 
 matplotlib 
-matplotlib.pyplot 
 flask 
 flask-cors 
 sklearn.ensemble 
@@ -9,6 +8,4 @@ sklearn.model_selection
 scipy.optimize 
 scikit-learn
 
-#conda install pandas numpy matplotlib scikit-learn scipy flask flask-cors
-#pip install flask-cors
 
