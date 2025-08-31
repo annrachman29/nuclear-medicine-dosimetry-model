@@ -1,11 +1,7 @@
-pandas 
-numpy 
-matplotlib 
-flask 
-flask-cors 
-sklearn.ensemble 
-sklearn.model_selection 
-scipy.optimize 
+pandas
+numpy
+matplotlib
+flask
+flask-cors
 scikit-learn
-
-
+scipy
