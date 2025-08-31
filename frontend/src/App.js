@@ -37,7 +37,7 @@ function App() {
     }
     setError("");
     try {
-      const res = await axios.post("http://127.0.0.1:8000/predict_model", { data: rows });
+      const res = await axios.post("https://nuclear-medicine-dosimetry-model-production.up.railway.app/predict_model", { data: rows });
       if (res.data) {
         setResult({
           best_model: res.data.best_model || "Unknown",
