@@ -70,7 +70,7 @@ Install dependencies:
 cd backend
 pip install -r requirements.txt
 ```
-Run backend server:
+Run backend server (file name: final_app.py):
 ```bash
 python final_app.py
 ```
@@ -83,7 +83,7 @@ Install dependencies:
 cd frontend
 npm install
 ```
-Run frontend:
+Run frontend (file name: App.js):
 ```bash
 npm start
 ```
