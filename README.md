@@ -96,14 +96,15 @@ The frontend development mode will run on (http://localhost:3000) in your browse
 
 ### 4. Using Virtual Patient Data
 You can manually input data in the frontend interface for testing
-**Example Input:**
+**Example Input for Sample Data to Test the Application:**
 
-*Time (h)*     | *%ID/gr*
-2     | 1.460908772
-18    | 0.793761054
-42    | 0.467941345
-88    | 0.354520415
-160   | 0.000581826
+| Time (h) | %ID/gr       |
+|----------|--------------|
+| 2        | 1.460908772  |
+| 18       | 0.793761054  |
+| 42       | 0.467941345  |
+| 88       | 0.354520415  |
+| 160      | 0.000581826  |
 
 **Real Best Model Output: f2**
 
